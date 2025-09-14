@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Makbule’den Burcu’ya</title>
+<style>
+  :root {
+    --pink:#ffe6eb;
+    --rose:#ff99aa;
+    --text:#5a2d2d;
+  }
+  html,body {
+    margin:0; padding:0; background:var(--pink); color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap {
+    max-width: 820px; margin: 0 auto; padding: 32px 20px; text-align:center;
+  }
+  img.makbule {
+    width: 100%; max-width: 420px; border-radius: 24px; box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-6px) }
+    100% { transform: translateY(0) }
+  }
+  h1 { font-size: 28px; margin: 18px 0 8px }
+  .lead { font-size: 18px; line-height:1.5; margin: 0 auto 18px; max-width: 720px }
+  .cta {
+    display:inline-block; background:var(--rose); color:#fff; border:none; border-radius:14px;
+    padding:14px 22px; font-size:18px; cursor:pointer; box-shadow: 0 6px 16px rgba(255,153,170,.5);
+  }
+  .cta:active { transform: translateY(1px) }
+  #message {
+    font-size: 22px; margin: 22px auto 10px; min-height: 2.2em; max-width:740px;
+    opacity:0; transform: scale(.98); transition: opacity .5s ease, transform .5s ease;
+  }
+  #message.show { opacity:1; transform: scale(1) }
+  /* Flower confetti */
+  .flower { position: fixed; top:-40px; width: 18px; height:18px; pointer-events:none; z-index:0; }
+  .petal {
+    width:100%; height:100%; background: radial-gradient(circle at 30% 30%, #fff 0 30%, rgba(255,255,255,.4) 31% 100%), var(--rose);
+    border-radius: 60% 40% 60% 40%;
+    filter: blur(.2px);
+    opacity:.85;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="makbule" src="makbule.jpg" alt="Makbule heykelciği">
+    <h1>Makbule’den Burcu’ya</h1>
+    <p class="lead">Doğum günün kutlu olsun Burcu, ben Makbule; senin mini şakşakcın. Güzel şeyler duymaya ihtiyacın olduğunda telefonunla bana dokunman yeter.</p>
+    <button class="cta" onclick="showMessage()">📳 Telefonunla Dokun – Makbule’ye Sor</button>
+    <div id="message" aria-live="polite"></div>
+  </div>
+
+  <script>
+    const affirmations = ['Burcu, bugün çok güzelsin.', 'Burcu, bu işi senden iyi kimse yapamazdı.', 'Burcu, kahveni yudumla ve günün tadını çıkar.', 'Burcu, kendine nazik olmayı unutma.', 'Burcu, yaptığın küçük adımlar büyük fark yaratıyor.', 'Burcu, gülümsemen bulunduğun odayı aydınlatıyor.', 'Burcu, yavaşlamak da bir ilerlemedir.', 'Burcu, kalbin kadar yolun da açık olsun.', 'Burcu, dinlenmek üretkenliğin gizli kahramanıdır.', 'Burcu, düşündüğünden daha güçlüsün.', 'Burcu, bugün başlamak için en güzel gün.', 'Burcu, akışa güven.', 'Burcu, izin ver hayat sana güzel sürprizler yapsın.', 'Burcu, kendini kıyaslama; kendi pistinde parlıyorsun.', 'Burcu, emeklerinin karşılığını tek tek alacaksın.', 'Burcu, her şey olması gerektiği hızda oluyor.', 'Burcu, sevilmeye ve kutlanmaya layıksın.', 'Burcu, hatasız değil, cesur oluşun önemli.', 'Burcu, kalbini hafiflet, günün de hafiflesin.', 'Burcu, zorluklar seni parlatmak için ciladır.', 'Burcu, küçük mutluluklar büyük günler yapar.', 'Burcu, sakin nefes al; her şey yoluna girer.', 'Burcu, düşüncelerini iyilikle besle.', 'Burcu, hayal kurmak plan yapmanın ilk adımıdır.', 'Burcu, öz-değerin tartışmaya kapalıdır.', 'Burcu, nazik sınırlar sevginin kardeşidir.', 'Burcu, bugün kendine bir minik hediye ver.', 'Burcu, mükemmel değil tamamlanmış olan güzeldir.', 'Burcu, iyiliğin bulaşıcı; sen başladın bile.', 'Burcu, her ‘hayır’ seni doğru ‘evet’e yaklaştırır.', 'Burcu, bedenini duy; ritmini o belirlesin.', 'Burcu, yol uzun ama adımların sağlam.', 'Burcu, iç sesinle ortak ol; harika işler çıkıyor.', 'Burcu, güvendesin; deneyip öğrenebilirsin.', 'Burcu, basit olan çoğu zaman en etkilidir.', 'Burcu, enerjini koru; herkesin derdini taşıyamazsın.', 'Burcu, bugün minnetini yaz; kalbin ferahlar.', 'Burcu, başkalarının beklentileri pusulan değil.', 'Burcu, cesur seçimlerin meyveleri tatlıdır.', 'Burcu, iyi bak kendine, dünya sana bakıyor.', 'Burcu, süreç de ödülün bir parçasıdır.', 'Burcu, vazgeçmek bazen ileridir.', 'Burcu, erteleme; küçük bir adım at.', 'Burcu, içindeki çocuğu güldür.', 'Burcu, zamana yay; her şey yetişir.', 'Burcu, kapılar kapansa da pencere açılır.', 'Burcu, iyileşme düz bir çizgi değildir.', 'Burcu, başarını küçümseme, kutla!', 'Burcu, hata bir veri noktasıdır.', 'Burcu, bugün merakın rehberin olsun.', 'Burcu, nazikçe hayır demek özgürlüktür.', 'Burcu, güzel haberlerin yolda.', 'Burcu, kendine güvendiğinde dağlar eğilir.', 'Burcu, sabrın kök salar, çiçekleri senin.', 'Burcu, her güne yeni bir şans ver.', 'Burcu, zor günlerin hatırası güç olur.', 'Burcu, yargısız dinle; önce kendini.', 'Burcu, yaptıkların sessizce ilham veriyor.', 'Burcu, planın olmasa bile niyetin güçlü.', 'Burcu, yardımı kabul etmek cesarettir.', 'Burcu, acele etme; güzellik ayrıntıda.', 'Burcu, omuzlarını indir; dünya hafiflesin.', 'Burcu, kalbinin çağrısını erteleme.', 'Burcu, iyi hissetmek için izin bekleme.', 'Burcu, bugün senin günün; tadını çıkar.', 'Burcu, her gün biraz daha sen ol.', 'Burcu, umut en iyi aksesuarındır.', 'Burcu, güldüğünde şansın da güler.', 'Burcu, nazik ol ama net ol.', 'Burcu, aklın berrak, yolun aydınlık.', 'Burcu, iç huzurun önceliğin olsun.', 'Burcu, beklentini gökyüzüne, adımlarını yere koy.', 'Burcu, dene—olmazsa yeniden dene.', 'Burcu, bugün kendini alkışla.', 'Burcu, yorulduğunda değil, bittiğinde dur.', 'Burcu, sevdiğin şeyleri takvime yaz.', 'Burcu, ihtiyaçlarını söylemek olgunluktur.', 'Burcu, merhametle konuş kendinle.', 'Burcu, şefkat performanstan değerlidir.', 'Burcu, kızgınlık yerine merak seç.', 'Burcu, kalabalıkta bile kendine ait bir köşen var.', 'Burcu, kolay olanı değil doğru olanı seç.', 'Burcu, içindeki bilgeliğe kulak ver.', 'Burcu, minik adım > kocaman bahane.', 'Burcu, konfor alanı güzel ama büyüme dışarıda.', 'Burcu, yolculuğunda acele yok, yarış yok.', 'Burcu, bugün ışığını kısmadan parla.', 'Burcu, bir molanın dünyayı yıkmaz.', 'Burcu, yetiyorsun; fazlası bonus.', 'Burcu, başarı tanımını sen yap.', 'Burcu, bir fincan çay ve derin bir nefes.', 'Burcu, ne hissettiğin gerçektir ve önemlidir.', 'Burcu, teşekkür et; bereket artar.', 'Burcu, çevrendeki sevgi gerçek ve canlı.', 'Burcu, bugün öğrenmeye açık ol.', 'Burcu, kendin için harcadığın zaman kutsaldır.', 'Burcu, risk al; kalbin rehberin olsun.', 'Burcu, işlerin en zor kısmı başlamak.', 'Burcu, belirsizliğe dostça yaklaş.', 'Burcu, değerini pazarlık konusu yapma.', 'Burcu, teslim olmak vazgeçmek değildir.', 'Burcu, şüphe geldiğinde kanıtlarını anımsa.', 'Burcu, bugün gücünü naziklikten al.', 'Burcu, sorumluluklarını değil, suçluluğunu bırak.', 'Burcu, hatırlatıcı: nefes al, su iç, gülümse.', 'Burcu, kendinle gurur duyacak çok şey var.', 'Burcu, gönlün nereye eğiliyorsa oraya eğil.', 'Burcu, bazen en iyi plan ‘akış’ planıdır.', 'Burcu, neşe pratiğini bugün de yap.', 'Burcu, umutlarını yüksek tut, omuzlarını da.', 'Burcu, küçük güzellikleri fark et: ışık, koku, rüzgâr.', 'Burcu, bugün biri için iyilik yap—ilk kişi kendin ol.', 'Burcu, sevgin emeğinle aynı dilden konuşuyor.', 'Burcu, içindeki Makbule ‘olur o’ diyor.', 'Burcu, gökyüzü kadar geniş bir ihtimalsin.'];
+    function showMessage() {
+      const el = document.getElementById('message');
+      const i = Math.floor(Math.random()*affirmations.length);
+      el.textContent = affirmations[i];
+      el.classList.remove('show');
+      void el.offsetWidth;
+      el.classList.add('show');
+      burstFlowers();
+    }
+    // Make flowers fall from random x positions
+    function burstFlowers() {
+      for (let i=0;i<12;i++) {
+        const f = document.createElement('div');
+        f.className='flower';
+        f.style.left = Math.random()*100 + 'vw';
+        const d = document.createElement('div');
+        d.className='petal';
+        f.appendChild(d);
+        document.body.appendChild(f);
+        const duration = 4000 + Math.random()*3000;
+        const drift = (Math.random()*80-40);
+        const start = performance.now();
+        function frame(t) {
+          const p = (t-start)/duration;
+          if (p>=1) return f.remove();
+          f.style.transform = `translate({drift*p}px, {p*100}vh) rotate({p*360}deg)`;
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+    }
+    // If page loaded from NFC, auto show
+    window.addEventListener('load', () => { showMessage(); });
+  </script>
+</body>
+</html>
